@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prumo Escolas — Teaser</title>
+<style>
+/* ============================================================
+   Prumo · colors_and_type.css  ·  Design System v1.1
+   Fonte única de verdade para cor + tipografia.
+   Slides, app, social e site herdam destes nomes semânticos.
+   Não usar hex cru fora deste arquivo.
+   Fontes: Fraunces + Inter (SIL OFL), self-hosted em /fonts.
+   ============================================================ */
+
+/* ---------- FONTES (variable, self-hosted) ---------- */
+
+
+
+
+
+:root{
+  /* ---------- COR: raw (paleta corrigida p/ WCAG 2.1 AA) ---------- */
+  --off-white:#F9F6F1;        --charcoal:#1C1C1E;     --charcoal-soft:#2C2C2E;
+  --olive:#4A6741;            --olive-light:#8FB07E;  --olive-soft:#EDF1E9;
+  --terracotta:#C4724A;       /* superfície / régua / ponto / texto >=18pt SOMENTE */
+  --terracotta-ink:#9E5734;   /* texto terracotta <18pt (5.04:1) */
+  --terracotta-light:#D98E6A; /* acento terracotta sobre fundo escuro (6.50:1) */
+  --terracotta-soft:#F5E4D8;
+  --slate:#4A6480;            --slate-soft:#E2E7EE;
+  --text-body:#555555;        --muted:#6E6A62;        --muted-on-dark:#9A958C;
+  --on-dark:#DDDDDD;          --line-light:#E5E0D6;   --line-dark:#2F2F32;
+
+  /* ---------- COR: semântica (use estes nomes ao construir) ---------- */
+  --bg:var(--off-white);          --bg-inverse:var(--charcoal);
+  --text:var(--charcoal);         --text-soft:var(--text-body);   --text-mute:var(--muted);
+  --text-on-dark:var(--on-dark);  --text-mute-on-dark:var(--muted-on-dark);
+  --heading:var(--olive);         --rule:var(--terracotta);
+  --link:var(--terracotta-ink);   --link-on-dark:var(--terracotta-light);
+
+  /* ---------- COR: produto (cor + letra F/E/C obrigatória) ---------- */
+  --p-familias:var(--terracotta); --p-escolas:var(--olive); --p-credenciados:var(--slate);
+
+  /* ---------- COR: estados (nunca semáforo) ---------- */
+  --state-ok:var(--olive);          --state-ok-bg:var(--olive-soft);
+  --state-attn:var(--terracotta-ink); --state-attn-bg:var(--terracotta-soft);
+  --state-info:var(--slate);        --state-info-bg:var(--slate-soft);
+
+  /* ---------- TIPOGRAFIA: famílias ---------- */
+  --font-display:Georgia,'Times New Roman',serif;
+  --font-body:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+
+  /* ---------- TIPOGRAFIA: ritmo (calmo) ---------- */
+  --leading-body:1.65; --leading-tight:1.12; --measure:38rem; /* ~66ch */
+
+  /* ---------- TIPOGRAFIA: escala (web em rem) ---------- */
+  --fs-h1:clamp(2.5rem,1.8rem + 3.4vw,4.75rem);   /* Cover / H1 · Fraunces 380 */
+  --fs-h2:clamp(1.9rem,1.4rem + 2vw,3rem);         /* Title · Fraunces 400 */
+  --fs-h3:clamp(1.3rem,1.1rem + .9vw,1.7rem);      /* Card title · Fraunces 400 */
+  --fs-lead:clamp(1.15rem,1.05rem + .5vw,1.4rem);  /* Lead · Inter 400 */
+  --fs-body:clamp(1rem,.95rem + .25vw,1.075rem);   /* Body · Inter 400 */
+  --fs-quote:1.25rem;                              /* Quote · Fraunces italic */
+  --fs-eyebrow:.72rem;                             /* Section label · Inter 600 caps */
+  --fs-meta:.7rem;                                 /* Meta/footer · Inter 500 caps */
+
+  /* ---------- ESPAÇO base-8 ---------- */
+  --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2rem; --s5:3rem;
+  --s6:4.5rem; --s7:6.5rem; --s8:9rem;
+
+  /* ---------- RAIO ---------- */
+  --r-btn:10px; --r-card:14px; --r-avatar:9px;
+}
+
+/* ============================================================
+   ESTILOS BASE SEMÂNTICOS — opcional, mas recomendado.
+   Aplique a classe .prumo no <body> (ou use as tags direto).
+   ============================================================ */
+.prumo{
+  background:var(--bg); color:var(--text-soft);
+  font-family:var(--font-body); font-weight:400;
+  font-size:var(--fs-body); line-height:var(--leading-body);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+
+.prumo h1,.prumo h2,.prumo h3,.prumo .display{
+  font-family:var(--font-display); font-weight:400;
+  color:var(--heading); line-height:var(--leading-tight); letter-spacing:-.01em;
+}
+.prumo h1{font-size:var(--fs-h1); font-weight:380}
+.prumo h2{font-size:var(--fs-h2)}
+.prumo h3{font-size:var(--fs-h3)}
+.prumo p{max-width:var(--measure)}
+.prumo .lead{font-size:var(--fs-lead); color:var(--text); line-height:1.5; max-width:34rem}
+.prumo em,.prumo .italic{font-family:var(--font-display); font-style:italic}
+.prumo a{color:var(--link); text-decoration-thickness:1px; text-underline-offset:2px}
+
+/* eyebrow / section label */
+.prumo .eyebrow{
+  font-family:var(--font-body); font-weight:600; font-size:var(--fs-eyebrow);
+  text-transform:uppercase; letter-spacing:.32em; color:var(--link); display:block;
+}
+.prumo .eyebrow.on-dark{color:var(--link-on-dark)}
+
+/* meta / footer label */
+.prumo .meta{
+  font-family:var(--font-body); font-weight:500; font-size:var(--fs-meta);
+  text-transform:uppercase; letter-spacing:.12em; color:var(--text-mute);
+}
+
+/* régua de acento — terracotta, nunca carrega texto */
+.prumo .rule{width:2.75rem; height:3px; background:var(--rule); border:0; margin:var(--s4) 0}
+.prumo .rule.center{margin-inline:auto}
+
+/* foco visível (obrigatório) */
+.prumo :focus-visible{outline:2px solid var(--terracotta); outline-offset:3px; border-radius:4px}
+
+/* seleção */
+.prumo ::selection{background:var(--terracotta-soft); color:var(--charcoal)}
+
+/* ---------- DARK THEME ---------- */
+/* olive base e terracotta-ink reprovam em escuro — trocar pelas variantes claras */
+.prumo.dark,.prumo .dark{background:var(--bg-inverse); color:var(--text-on-dark)}
+.prumo.dark h1,.prumo.dark h2,.prumo.dark h3,
+.prumo .dark h1,.prumo .dark h2,.prumo .dark h3{color:var(--off-white)}
+.prumo.dark .eyebrow,.prumo .dark .eyebrow{color:var(--link-on-dark)}
+.prumo.dark .accent,.prumo .dark .accent{color:var(--olive-light)}
+.prumo.dark a,.prumo .dark a{color:var(--link-on-dark)}
+
+/* ---------- MOVIMENTO ---------- */
+@media(prefers-reduced-motion:reduce){
+  .prumo *{animation:none!important; transition:none!important; scroll-behavior:auto!important}
+}
+
+/* ============================================================
+   Prumo · Escola Parceira Teaser — estilos do deck
+   16:9 · 1280×720 · Fraunces + Inter · tokens herdados de colors_and_type.css
+   ============================================================ */
+
+/* ============================================================
+   Convite (slide de fechamento — sem comercial)
+   ============================================================ */
+.invitewrap{position:absolute;left:var(--pad);right:var(--pad);top:230px;display:grid;grid-template-columns:1fr 1fr;gap:0 64px;align-items:start}
+.invite-expect{display:flex;flex-direction:column}
+.invite-expect .ehd{font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-light);margin-bottom:4px}
+.einrow{display:flex;gap:15px;align-items:flex-start;padding:17px 0;border-top:1px solid var(--line-dark)}
+.einrow .ed{font-family:var(--font-display);font-size:20px;color:var(--terracotta-light);line-height:1;flex:none}
+.einrow .et{font-family:var(--font-display);font-size:19px;color:var(--off-white);line-height:1.2}
+.einrow .ep{font-size:13.5px;line-height:1.5;color:var(--on-dark);margin-top:5px;max-width:330px}
+.invite-lead{font-size:16.5px;line-height:1.6;color:var(--on-dark);max-width:430px}
+.invite-lead em{color:var(--olive-light)}
+
+/* ============================================================
+   S9 · O convite (layout limpo, 2 contatos)
+   ============================================================ */
+.close-head{position:absolute;left:var(--pad);right:var(--pad);top:122px}
+.close-head h2{font-size:46px;color:var(--off-white);margin-top:16px;max-width:940px;line-height:1.1;letter-spacing:-.015em}
+.close-head h2 em{color:var(--olive-light)}
+.close-head .clead{font-size:16.5px;line-height:1.62;color:var(--on-dark);margin-top:20px;max-width:720px}
+.close-head .clead em{color:var(--terracotta-light);font-family:var(--font-display);font-style:italic}
+.close-expect{position:absolute;left:var(--pad);right:var(--pad);top:368px;display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+.close-expect .ce{padding:20px 28px 20px 0}
+.close-expect .ce + .ce{border-left:1px solid var(--line-dark);padding-left:28px}
+.close-expect .cet{display:flex;align-items:baseline;gap:9px;font-family:var(--font-display);font-size:18.5px;color:var(--off-white);line-height:1.2}
+.close-expect .cet .cd{color:var(--terracotta-light)}
+.close-expect .cep{font-size:13px;line-height:1.5;color:var(--on-dark);margin-top:8px}
+.close-contacts{position:absolute;left:var(--pad);right:var(--pad);bottom:74px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+  border-top:1px solid var(--line-dark);padding-top:20px}
+.contacts{display:flex;gap:56px}
+.contact .cn{font-family:var(--font-display);font-size:20px;color:var(--off-white);line-height:1}
+.contact .crole{font-weight:600;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta-light);margin-top:7px}
+.contact .cc{font-size:13.5px;color:var(--on-dark);margin-top:6px;line-height:1.5}
+.contact .cc a{color:var(--terracotta-light);text-decoration:none}
+.close-contacts .invite{font-family:var(--font-display);font-style:italic;font-size:18px;color:var(--olive-light);text-align:right;white-space:nowrap}
+
+/* ============================================================
+   Reveals — desativados (conteúdo sempre visível p/ captura/PDF/PPTX)
+   ============================================================ */
+
+/* ============================================================
+   S2 · A terça-feira da coordenação (caos + Theo)
+   ============================================================ */
+.s2wrap{position:absolute;left:var(--pad);right:var(--pad);top:256px;bottom:84px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:0 60px;align-items:start}
+.s2-left{align-self:start;padding-right:8px}
+.s2-left .big{font-family:var(--font-display);font-size:33px;line-height:1.18;color:var(--charcoal);letter-spacing:-.01em}
+.s2-left .big em{color:var(--terracotta-ink)}
+.s2-left .sub{font-size:15.5px;line-height:1.62;color:var(--text-body);margin-top:18px;max-width:380px}
+.s2-theo{margin-top:24px;display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--line-light)}
+.s2-theo .ph{width:50px;height:50px;border-radius:12px;flex:none;background:var(--olive-soft);color:var(--olive);
+  display:grid;place-items:center;font-family:var(--font-display);font-size:22px}
+.s2-theo .tx{font-family:var(--font-display);font-style:italic;font-size:16px;line-height:1.4;color:var(--charcoal)}
+.s2-theo .tx b{font-style:normal;font-weight:500;color:var(--terracotta-ink)}
+
+/* thread — a manhã, conectada pela costura */
+.thread{position:relative;padding-left:26px}
+.thread::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;
+  background:repeating-linear-gradient(var(--line-light) 0 6px,transparent 6px 11px)}
+.tnode{position:relative;padding:0 0 19px}
+.tnode:last-child{padding-bottom:0}
+.tnode::before{content:"";position:absolute;left:-26px;top:5px;width:12px;height:12px;border-radius:50%;
+  background:var(--off-white);border:2px solid var(--terracotta);box-shadow:0 0 0 4px var(--off-white)}
+.tnode.crit::before{background:var(--terracotta);border-color:var(--terracotta)}
+.tnode .tmeta{display:flex;align-items:center;gap:10px;margin-bottom:3px}
+.tnode .ttime{font-weight:600;font-size:12px;color:var(--charcoal);font-variant-numeric:tabular-nums}
+.tnode .tchan{font-weight:600;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;
+  border:1px solid var(--line-light);border-radius:999px;padding:2px 9px}
+.tnode .tchan.wpp{color:var(--terracotta-ink);border-color:var(--terracotta-light);background:var(--terracotta-soft)}
+.tnode .ttext{font-size:14px;line-height:1.5;color:var(--text-body);max-width:560px}
+.tnode .ttext b{color:var(--charcoal);font-weight:500}
+
+/* ============================================================
+   S3 · A virada (dark, breath)
+   ============================================================ */
+.turn{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 140px}
+.turn .eb{margin-bottom:26px}
+.turn h2{font-size:58px;line-height:1.1;color:var(--off-white);max-width:1000px;letter-spacing:-.018em}
+.turn h2 em{color:var(--olive-light)}
+.turn .tlead{font-size:18px;line-height:1.6;color:var(--on-dark);margin-top:26px;max-width:680px}
+.turn .tlead em{color:var(--terracotta-light);font-family:var(--font-display);font-style:italic}
+.verbsrow{display:flex;gap:0;margin-top:52px;border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+.verbsrow .vb{flex:1;padding:30px 26px;text-align:center}
+.verbsrow .vb + .vb{border-left:1px solid var(--line-dark)}
+.verbsrow .vn{font-family:var(--font-display);font-size:36px;color:var(--off-white);letter-spacing:-.01em;line-height:1}
+.verbsrow .vb:nth-child(1) .vn{color:var(--olive-light)}
+.verbsrow .vb:nth-child(2) .vn{color:var(--terracotta-light)}
+.verbsrow .vb:nth-child(3) .vn{color:#9DB6CE}
+.verbsrow .vd{font-size:14.5px;color:var(--on-dark);margin-top:12px;letter-spacing:.01em}
+
+/* ============================================================
+   S4 · A plataforma — Escolas + Famílias (2-up)
+   ============================================================ */
+.platrow{position:absolute;left:var(--pad);right:var(--pad);top:262px;display:grid;grid-template-columns:1fr 70px 1fr;align-items:stretch;gap:0}
+.platcard{background:#fff;border:1px solid var(--line-light);border-radius:16px;padding:30px 32px;display:flex;flex-direction:column;border-top:4px solid var(--accent)}
+.platcard.e{--accent:var(--olive)}.platcard.f{--accent:var(--terracotta)}
+.platcard .pch{display:flex;align-items:center;gap:15px}
+.platcard .pav{width:50px;height:50px;border-radius:11px;color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-size:25px;flex:none}
+.platcard.e .pav{background:var(--olive)}.platcard.f .pav{background:var(--terracotta)}
+.platcard .pname{font-family:var(--font-display);font-size:24px;color:var(--charcoal)}
+.platcard .ptag{font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;white-space:nowrap}
+.platcard .plead{font-family:var(--font-display);font-style:italic;font-size:22px;line-height:1.25;margin:24px 0 12px}
+.platcard.e .plead{color:var(--olive)}.platcard.f .plead{color:var(--terracotta-ink)}
+.platcard .pdesc{font-size:15px;line-height:1.6;color:var(--text-body)}
+.platcard .pfeat{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-light);display:flex;flex-direction:column;gap:9px}
+.platcard .pfeat .pf{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--charcoal)}
+.platcard .pfeat .pf svg{width:17px;height:17px;flex:none;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.platcard.e .pf svg{stroke:var(--olive)}.platcard.f .pf svg{stroke:var(--terracotta-ink)}
+.platlink{display:grid;place-items:center;position:relative}
+.platlink::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:2px;height:64%;
+  background:repeating-linear-gradient(var(--line-light) 0 5px,transparent 5px 10px)}
+.platlink .knot{position:relative;background:var(--off-white);font-family:var(--font-display);font-size:14px;color:var(--charcoal);padding:8px 4px;text-align:center;line-height:1.1}
+.platlink .knot .dot{color:var(--terracotta)}
+.platlink .klabel{position:relative;background:var(--off-white);font-weight:600;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px;white-space:nowrap}
+.adopt{position:absolute;left:var(--pad);right:var(--pad);bottom:78px;display:flex;align-items:center;gap:14px;
+  background:var(--olive-soft);border-radius:12px;padding:15px 22px}
+.adopt .bdot{font-size:20px}
+.adopt p{font-size:14.5px;color:var(--charcoal);line-height:1.45}
+.adopt em{color:var(--olive);font-style:italic;font-family:var(--font-display)}
+
+/* ============================================================
+   Telas de produto — moldura + barra
+   ============================================================ */
+.screen-head{position:absolute;left:var(--pad);right:var(--pad);top:88px}
+.screen-head .eb{margin-bottom:2px}
+.screen-head h2{font-size:30px;margin-top:10px}
+.screen-head .lead{font-size:15.5px;line-height:1.5;color:var(--text-body);margin-top:8px;max-width:820px}
+.screenslot{position:absolute;left:var(--pad);right:var(--pad);top:208px;bottom:78px;display:flex;justify-content:center;align-items:flex-start}
+.scap-pin{position:absolute;display:flex;align-items:flex-start;gap:9px;max-width:228px;z-index:3}
+.scap-pin .cd{color:var(--terracotta);font-family:var(--font-display);font-size:19px;line-height:1;flex:none}
+.scap-pin .ct{font-family:var(--font-display);font-size:15px;color:var(--charcoal);line-height:1.22}
+.scap-pin .cp{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ---- Caso do Theo (tela 2) ---- */
+.caso{font-family:var(--font-body);text-align:left;color:var(--text-body);background:var(--off-white);padding:22px 26px 20px}
+.caso-top{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line-light)}
+.caso-top .ph{width:58px;height:58px;border-radius:13px;flex:none;background:var(--olive-soft);color:var(--olive);
+  display:grid;place-items:center;font-family:var(--font-display);font-size:26px}
+.caso-top .nm{font-family:var(--font-display);font-size:25px;color:var(--charcoal);line-height:1.05;letter-spacing:-.01em}
+.caso-top .mt{font-size:12.5px;color:var(--muted);margin-top:4px}
+.caso-top .nee{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:11px;
+  color:#fff;background:var(--terracotta-ink);border-radius:7px;padding:6px 12px;flex:none}
+.caso-top .fam{display:inline-flex;align-items:center;gap:6px;font-weight:500;font-size:11.5px;color:var(--olive);
+  background:var(--olive-soft);border-radius:999px;padding:5px 11px;flex:none}
+.caso-top .fam svg{width:13px;height:13px;stroke:var(--olive);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.caso-sech{display:flex;align-items:baseline;gap:12px;margin:18px 0 13px}
+.caso-sech .h{font-family:var(--font-display);font-size:18px;color:var(--olive)}
+.caso-sech .s{font-size:12px;color:var(--muted)}
+.dimgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dimc{background:#fff;border:1px solid var(--line-light);border-top:3px solid var(--dc);border-radius:13px;padding:14px 16px}
+.dimc.terra{--dc:var(--terracotta)}.dimc.slate{--dc:var(--slate)}.dimc.olive{--dc:var(--olive)}
+.dimc .dh{display:flex;align-items:center;gap:10px}
+.dimc .di{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--dcb);color:var(--dc)}
+.dimc.terra{--dcb:var(--terracotta-soft)}.dimc.slate{--dcb:var(--slate-soft)}.dimc.olive{--dcb:var(--olive-soft)}
+.dimc .di svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dimc .dn{font-family:var(--font-display);font-size:16px;color:var(--charcoal)}
+.dimc .dchip{display:inline-flex;align-items:center;gap:6px;margin:11px 0 9px;font-weight:600;font-size:10px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--dc);background:var(--dcb);border-radius:999px;padding:3px 9px}
+.dimc .dchip .dd{width:5px;height:5px;border-radius:50%;background:var(--dc)}
+.dimc .ds{font-size:12.5px;line-height:1.45;color:var(--text-body)}
+.casoband{display:flex;align-items:center;gap:11px;margin-top:16px;background:var(--charcoal);border-radius:12px;padding:13px 18px}
+.casoband svg{width:18px;height:18px;flex:none;stroke:var(--olive-light);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.casoband p{font-size:13px;color:var(--on-dark);line-height:1.45}
+.casoband b{color:#fff;font-weight:600}
+.casoband .sig{margin-left:auto;font-weight:600;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-light);white-space:nowrap;flex:none}
+
+/* compact dimension strip (tela 2) */
+.caso-sech .tag{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--terracotta-ink);background:var(--terracotta-soft);border-radius:999px;padding:4px 11px}
+.dimstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.dimtile{background:#fff;border:1px solid var(--line-light);border-left:3px solid var(--dc);border-radius:11px;padding:10px 13px;display:flex;align-items:center;gap:10px}
+.dimtile.terra{--dc:var(--terracotta);--dcb:var(--terracotta-soft);--dct:var(--terracotta-ink)}
+.dimtile.slate{--dc:var(--slate);--dcb:var(--slate-soft);--dct:var(--slate)}
+.dimtile.olive{--dc:var(--olive);--dcb:var(--olive-soft);--dct:var(--olive)}
+.dimtile .di{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--dcb);color:var(--dc)}
+.dimtile .di svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dimtile .dn{font-family:var(--font-display);font-size:15px;color:var(--charcoal);line-height:1}
+.dimtile .dchip{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--dct);background:var(--dcb);border-radius:999px;padding:3px 8px;white-space:nowrap;flex:none}
+.dimtile .dchip .dd{width:5px;height:5px;border-radius:50%;background:var(--dct)}
+
+/* combinados (tela 2) */
+.comborow{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.combo{background:#fff;border:1px solid var(--line-light);border-radius:12px;padding:13px 15px;display:flex;flex-direction:column}
+.combo .ctag{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.combo .ctag .cdim{font-weight:600;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--olive);background:var(--olive-soft);border-radius:5px;padding:3px 7px}
+.combo .ctitle{font-size:13px;line-height:1.4;color:var(--charcoal);font-weight:500}
+.combo .cfoot{margin-top:11px;padding-top:11px;border-top:1px solid var(--line-light);display:flex;align-items:center;gap:8px}
+.combo .who{display:flex;align-items:center}
+.combo .who .av{width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-family:var(--font-display);font-size:11px;color:#fff;margin-left:-5px;border:1.5px solid #fff}
+.combo .who .av:first-child{margin-left:0}
+.combo .who .av.esc{background:var(--olive)}.combo .who .av.fam{background:var(--terracotta)}.combo .who .av.prof{background:var(--slate)}
+.combo .cstat{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:10px;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.combo .cstat svg{width:11px;height:11px;stroke-width:2.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.combo .cstat.ok{color:var(--olive);background:var(--olive-soft)}.combo .cstat.ok svg{stroke:var(--olive)}
+.combo .cstat.go{color:var(--slate);background:var(--slate-soft)}.combo .cstat.go svg{stroke:var(--slate)}
+.combo .cstat.due{color:var(--terracotta-ink);background:var(--terracotta-soft)}.combo .cstat.due svg{stroke:var(--terracotta-ink)}
+
+/* ---- Família mobile (tela 3) ---- */
+.fam3{position:absolute;left:var(--pad);right:var(--pad);top:212px;bottom:78px;display:grid;grid-template-columns:300px 1fr;gap:54px;align-items:center}
+.phone{width:300px;justify-self:center;background:#000;border-radius:38px;padding:11px;box-shadow:0 36px 70px -34px rgba(28,28,30,.5)}
+.phone-scr{background:var(--off-white);border-radius:28px;overflow:hidden;height:402px;display:flex;flex-direction:column}
+.fam-top{background:var(--charcoal);color:#fff;padding:24px 20px 14px;position:relative}
+.fam-top .eb{color:var(--terracotta-light);font-size:9.5px;letter-spacing:.2em}
+.fam-top .hi{font-family:var(--font-display);font-size:22px;color:#fff;margin-top:6px;letter-spacing:-.01em}
+.fam-top .wm{position:absolute;top:14px;right:18px;font-family:var(--font-display);font-size:14px;color:#fff}
+.fam-top .wm .dot{color:var(--terracotta-light)}
+.fam-body{flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:11px;overflow:hidden}
+.fam-prompt{background:var(--terracotta-soft);border:1px solid var(--terracotta-light);border-radius:14px;padding:13px 14px}
+.fam-prompt .q{font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--terracotta-ink);line-height:1.28}
+.fam-prompt .a{margin-top:10px;display:inline-flex;align-items:center;gap:7px;background:var(--terracotta-ink);color:#fff;
+  border-radius:9px;padding:7px 12px;font-weight:600;font-size:11.5px}
+.fam-lbl{font-weight:600;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.fam-entry{background:#fff;border:1px solid var(--line-light);border-radius:13px;padding:13px 14px}
+.fam-entry .ew{font-size:11px;color:var(--muted);margin-bottom:5px}
+.fam-entry .et{font-size:13px;line-height:1.5;color:var(--charcoal)}
+.fam-entry .et b{font-weight:600}
+.fam-consent{margin-top:auto;display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--muted);line-height:1.4}
+.fam-consent svg{width:14px;height:14px;flex:none;stroke:var(--olive);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+/* right explanatory column */
+.fam-exp .eb{margin-bottom:14px}
+.fam-exp h3{font-family:var(--font-display);font-weight:400;font-size:30px;color:var(--olive);line-height:1.16;letter-spacing:-.01em;max-width:440px}
+.fam-exp h3 em{color:var(--terracotta-ink);font-style:italic}
+.fam-flow{margin-top:26px;display:flex;flex-direction:column;gap:0}
+.fam-step{display:flex;gap:15px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line-light)}
+.fam-step:last-child{border-bottom:1px solid var(--line-light)}
+.fam-step .sd{font-family:var(--font-display);font-size:18px;color:var(--terracotta);line-height:1;flex:none;width:18px}
+.fam-step .stt{font-family:var(--font-display);font-size:17px;color:var(--charcoal);line-height:1.2}
+.fam-step .stp{font-size:13px;line-height:1.5;color:var(--text-body);margin-top:4px;max-width:420px}
+
+/* ============================================================
+   S · O que muda (outcomes — cards com antes/agora)
+   ============================================================ */
+.outcomes{position:absolute;left:var(--pad);right:var(--pad);top:250px;bottom:84px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ocard{background:#fff;border:1px solid var(--line-light);border-radius:16px;padding:28px 28px;display:flex;flex-direction:column}
+.ocard .oi{width:50px;height:50px;border-radius:13px;background:var(--olive);color:#fff;display:grid;place-items:center;margin-bottom:20px;flex:none}
+.ocard .oi svg{width:25px;height:25px;stroke:#fff;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ocard .ot{font-family:var(--font-display);font-size:24px;color:var(--charcoal);line-height:1.16;letter-spacing:-.01em}
+.ocard .ot em{color:var(--olive);font-style:italic}
+.ocard .op{font-size:14px;line-height:1.55;color:var(--text-body);margin-top:11px}
+.ocard .contrast{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-light);display:flex;flex-direction:column;gap:9px}
+.ocard .cr{display:flex;gap:11px;font-size:13px;line-height:1.35}
+.ocard .cr .cl{font-weight:600;font-size:9px;letter-spacing:.12em;text-transform:uppercase;width:40px;flex:none;padding-top:3px}
+.ocard .cr.ca{color:var(--muted)}
+.ocard .cr.ca .cl{color:var(--terracotta-ink)}
+.ocard .cr.cb{color:var(--charcoal)}
+.ocard .cr.cb .cl{color:var(--olive)}
+
+/* ============================================================
+   S · Benefícios financeiros (dark · o retorno do cuidado)
+   ============================================================ */
+.fingrid{position:absolute;left:var(--pad);right:var(--pad);top:266px;bottom:82px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.fincard{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--line-dark);border-radius:18px;padding:28px 28px 24px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.fincard::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--olive)}
+.fincard .ftop{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.fincard .farrow{width:56px;height:56px;border-radius:15px;background:var(--olive);color:#fff;display:grid;place-items:center;flex:none;box-shadow:0 12px 26px -12px rgba(74,103,65,.8)}
+.fincard .farrow svg{width:30px;height:30px;stroke:#fff;stroke-width:2.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fincard .flabel{font-weight:600;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive-light);border:1px solid var(--line-dark);border-radius:999px;padding:6px 13px;white-space:nowrap}
+.fincard .ft{font-family:var(--font-display);font-size:27px;color:var(--off-white);line-height:1.13;letter-spacing:-.012em}
+.fincard .ft em{color:var(--olive-light);font-style:italic}
+.fincard .fp{font-size:14px;line-height:1.6;color:var(--on-dark);margin-top:13px}
+.fincard .fmetric{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-dark);display:flex;align-items:baseline;gap:9px}
+.fincard .fmetric .dir{font-family:var(--font-display);font-size:21px;color:var(--olive-light);line-height:1;flex:none}
+.fincard .fmetric .kpi{font-weight:600;font-size:13.5px;letter-spacing:.01em;color:var(--off-white)}
+.fincard .fmetric .kpi b{display:block;font-weight:400;font-size:11px;letter-spacing:.04em;color:var(--muted-on-dark);text-transform:uppercase;margin-top:3px}
+
+
+*{box-sizing:border-box}
+
+
+
+/* ---------- canvas ---------- */
+.slide{
+  width:1280px;height:720px;position:relative;overflow:hidden;
+  background:var(--off-white);color:var(--text-body);
+  font-family:var(--font-body);font-weight:400;
+  --pad:84px;
+}
+.slide.dark{background:var(--charcoal);color:var(--on-dark)}
+
+/* ---------- type primitives ---------- */
+.wm{font-family:var(--font-display);font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--charcoal)}
+.dark .wm{color:var(--off-white)}
+.wm .dot{color:var(--terracotta)}
+.dark .wm .dot{color:var(--terracotta-light)}
+
+.eb{font-family:var(--font-body);font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--terracotta-ink)}
+.dark .eb{color:var(--terracotta-light)}
+.rule{width:52px;height:3px;background:var(--terracotta);border:0}
+h1,h2,h3{margin:0;font-family:var(--font-display);font-weight:400;color:var(--olive);line-height:1.12;letter-spacing:-.01em}
+.dark h1,.dark h2,.dark h3{color:var(--off-white)}
+em{font-style:italic;font-family:var(--font-display)}
+.t-terra{color:var(--terracotta)}
+.t-olive{color:var(--olive-light)}
+p{margin:0}
+
+/* ---------- chrome ---------- */
+.chrome{position:absolute;left:var(--pad);right:var(--pad);top:52px;display:flex;justify-content:space-between;align-items:center}
+.chrome .wm{font-size:20px}
+.chrome .org{font-weight:500;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.dark .chrome .org{color:var(--muted-on-dark)}
+.foot{position:absolute;left:var(--pad);right:var(--pad);bottom:46px;display:flex;justify-content:space-between;align-items:center;
+  font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.dark .foot{color:var(--muted-on-dark)}
+
+/* ---------- header block (content slides) ---------- */
+.head{position:absolute;left:var(--pad);right:var(--pad);top:104px}
+.head h2{font-size:38px;margin-top:16px;max-width:960px}
+.head .lead{font-size:18px;line-height:1.5;color:var(--text-body);margin-top:12px;max-width:760px}
+
+/* ---------- avatar (cor + letra) ---------- */
+.av{border-radius:9px;color:var(--off-white);display:grid;place-items:center;font-family:var(--font-display);flex:none}
+
+/* ---------- cards ---------- */
+.card{background:#fff;border:1px solid var(--line-light);border-radius:14px;box-sizing:border-box}
+
+/* dotted decorative dot */
+.bdot{color:var(--terracotta);font-family:var(--font-display)}
+
+/* ============================================================
+   S5 · diagrama núcleo (entradas · núcleo · saídas)
+   ============================================================ */
+.flow{position:absolute;left:var(--pad);right:var(--pad);top:268px;display:grid;
+  grid-template-columns:1fr 52px 348px 52px 1fr;align-items:stretch;gap:0}
+.flowcol .collab{font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.flowcol.io .collab{text-align:left}
+.iocard{background:#fff;border:1px solid var(--line-light);border-radius:13px;padding:15px 17px;margin-bottom:13px;display:flex;gap:13px;align-items:flex-start}
+.iocard > div:last-child{flex:1;min-width:0}
+.iocard:last-child{margin-bottom:0}
+.iocard .ic{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;flex:none}
+.iocard .ic svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.iocard .ti{font-family:var(--font-display);font-size:16.5px;color:var(--charcoal);line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iocard .de{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.flowarrow{display:grid;place-items:center}
+.flowarrow svg{width:34px;height:18px;stroke:var(--terracotta);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.core{background:var(--charcoal);border-radius:16px;padding:24px 24px;display:flex;flex-direction:column;color:var(--on-dark);position:relative;overflow:hidden}
+.core::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% -10%,rgba(196,114,74,.16),transparent 60%);pointer-events:none}
+.core .ch{display:flex;align-items:center;gap:9px;justify-content:center;margin-bottom:4px}
+.core .ch .wm{font-size:17px;color:var(--off-white)}
+.core .cs{text-align:center;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-on-dark);margin-bottom:16px}
+.verbs{display:grid;grid-template-columns:1fr 1fr;gap:11px;position:relative;z-index:1}
+.verb{background:var(--charcoal-soft);border:1px solid var(--line-dark);border-radius:11px;padding:13px 14px}
+.verb .vn{font-family:var(--font-display);font-size:17px;letter-spacing:.02em;color:var(--off-white)}
+.verb .vd{font-size:11.5px;color:var(--muted-on-dark);margin-top:4px;line-height:1.3;white-space:nowrap}
+.verb.k0 .vn{color:var(--olive-light)}.verb.k1 .vn{color:var(--terracotta-light)}
+.verb.k2 .vn{color:#9DB6CE}.verb.k3 .vn{color:var(--off-white)}
+
+.flownote{position:absolute;left:var(--pad);right:var(--pad);bottom:92px;border-top:1px solid var(--line-light);padding-top:14px;
+  display:flex;align-items:baseline;gap:12px}
+.flownote .lbl{display:inline-flex;align-items:center;gap:8px;flex:none}
+.flownote .cdot{width:18px;height:18px;border-radius:6px;background:var(--slate);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-size:11px}
+.flownote p{font-size:13.5px;line-height:1.5;color:var(--text-body)}
+.flownote strong{color:var(--charcoal);font-weight:600}
+
+/* ============================================================
+   S6 · tela real (browser frame + sysapp)
+   ============================================================ */
+.screenwrap{position:absolute;left:var(--pad);right:var(--pad);top:230px;bottom:84px;display:flex;justify-content:center;align-items:flex-start}
+.browser{width:1006px;border-radius:14px;overflow:hidden;border:1px solid var(--line-light);box-shadow:0 30px 60px -34px rgba(28,28,30,.5);background:#fff;transform-origin:top center}
+.browser .bbar{height:38px;background:#EFEAE2;border-bottom:1px solid var(--line-light);display:flex;align-items:center;gap:8px;padding:0 14px}
+.browser .tl{display:flex;gap:7px}
+.browser .tl i{width:11px;height:11px;border-radius:50%;display:block}
+.browser .tl i:nth-child(1){background:#D98E6A}.browser .tl i:nth-child(2){background:#E6C56A}.browser .tl i:nth-child(3){background:#8FB07E}
+.browser .url{margin-left:14px;flex:1;background:#fff;border:1px solid var(--line-light);border-radius:8px;height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:var(--muted)}
+.browser .url b{color:var(--charcoal);font-weight:500}
+
+/* sysapp (réplica fiel do site — compactada p/ slide) */
+.sysapp{display:flex;height:520px;background:var(--off-white);font-family:var(--font-body);text-align:left;color:var(--text-body)}
+.sys-side{width:240px;flex:none;background:var(--off-white);border-right:1px solid var(--line-light);display:flex;flex-direction:column;padding:18px 13px}
+.sys-brand{display:flex;align-items:center;gap:10px;padding:0 6px 16px;white-space:nowrap}
+.sys-brand .wm2{font-family:var(--font-display);font-size:18px;color:var(--charcoal);letter-spacing:-.01em}
+.sys-brand .wm2 .dot{color:var(--terracotta)}
+.sys-brand .ebadge{width:23px;height:23px;border-radius:7px;background:var(--olive);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-size:12px}
+.sys-seclabel{font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:0 12px 8px;white-space:nowrap}
+.sys-nav{display:flex;flex-direction:column;gap:3px}
+.sys-nav .item{display:flex;align-items:center;gap:11px;color:var(--text-body);border-radius:10px;padding:8px 12px;font-weight:500;font-size:13px;white-space:nowrap}
+.sys-nav .item.active{background:var(--olive-soft);color:var(--olive);font-weight:600}
+.sys-icon{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sys-user{margin-top:auto;border-top:1px solid var(--line-light);padding-top:13px;display:flex;align-items:center;gap:10px}
+.sys-user .ua{width:31px;height:31px;border-radius:9px;background:var(--slate-soft);color:var(--slate);display:grid;place-items:center;font-family:var(--font-display);font-size:13px;flex:none}
+.sys-user .un{font-weight:500;font-size:12px;color:var(--charcoal);white-space:nowrap}
+.sys-user .ur{font-size:10.5px;color:var(--muted)}
+.sys-main{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--off-white)}
+.sys-top{display:flex;align-items:center;gap:20px;padding:17px 24px 15px;border-bottom:1px solid var(--line-light)}
+.sys-top .ebt{font-weight:600;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-ink);margin-bottom:5px}
+.sys-top .tt{font-family:var(--font-display);font-size:23px;color:var(--olive);letter-spacing:-.01em;line-height:1;white-space:nowrap}
+.sys-top > div:first-child{flex:none}
+.sys-search{margin-left:auto;flex:none;display:flex;align-items:center;gap:9px;background:var(--off-white);border:1px solid var(--line-light);border-radius:10px;padding:7px 12px;width:210px;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.sys-search .sys-icon{width:15px;height:15px;stroke-width:1.7}
+.sys-bodyscroll{flex:1;overflow:hidden;padding:22px 24px}
+.sys-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:22px}
+.sys-stat{background:#fff;border:1px solid var(--line-light);border-radius:14px;padding:15px 17px;display:flex;align-items:center;gap:12px}
+.sys-stat .sys-icon{width:21px;height:21px;color:var(--olive)}
+.sys-stat .n{font-family:var(--font-display);font-size:28px;color:var(--charcoal);line-height:1}
+.sys-stat .l{font-size:12px;color:var(--muted);margin-top:4px;white-space:nowrap}
+.sys-sechead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;gap:12px}
+.sys-sechead .h{font-family:var(--font-display);font-size:18px;color:var(--olive)}
+.sys-sechead .s{font-size:12px;color:var(--muted);white-space:nowrap}
+.sys-list{background:#fff;border:1px solid var(--line-light);border-radius:14px;overflow:hidden}
+.sys-row{display:flex;align-items:center;gap:14px;padding:14px 17px;border-top:1px solid var(--line-light)}
+.sys-row:first-child{border-top:0}
+.sys-av{width:39px;height:39px;border-radius:10px;background:var(--olive-soft);color:var(--olive);display:grid;place-items:center;font-family:var(--font-display);font-size:16px;flex:none}
+.sys-row .meta{flex:1;min-width:0}
+.sys-row .nm{font-weight:500;font-size:14px;color:var(--charcoal);white-space:nowrap}
+.sys-row .nm .tg{font-weight:400;font-size:11.5px;color:var(--muted);margin-left:8px}
+.sys-row .nt{font-size:12.5px;color:var(--text-body);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sys-row .when{font-size:11px;color:var(--muted);width:72px;text-align:right;flex:none}
+.pchip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 11px 4px 9px;font-weight:600;font-size:11.5px;white-space:nowrap;flex:none}
+.pchip .sys-icon{width:13px;height:13px;stroke-width:1.9}
+.pchip.segue{background:var(--olive-soft);color:var(--olive)}
+.pchip.observar{background:var(--terracotta-soft);color:var(--terracotta-ink)}
+.pchip.acompanhar{background:var(--slate-soft);color:var(--slate)}
+
+/* caption pins around the screen */
+.scap{position:absolute;display:flex;align-items:flex-start;gap:9px;max-width:230px}
+.scap .cd{color:var(--terracotta);font-family:var(--font-display);font-size:18px;line-height:1;flex:none}
+.scap .ct{font-family:var(--font-display);font-size:15px;color:var(--charcoal);line-height:1.2}
+.scap .cp{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ============================================================
+   S7/S9 · pilares numerados (grid 2×2 / 4-up)
+   ============================================================ */
+.pillars{position:absolute;left:var(--pad);right:var(--pad);top:248px;bottom:90px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px 24px}
+.pillar{background:#fff;border:1px solid var(--line-light);border-radius:16px;padding:26px 30px;display:flex;gap:20px;align-items:flex-start}
+.pillar .pn{font-family:var(--font-display);font-size:40px;color:var(--terracotta);line-height:.85;flex:none;width:56px}
+.pillar .pt{font-family:var(--font-display);font-size:23px;color:var(--charcoal);line-height:1.16}
+.pillar .pp{font-size:14.5px;line-height:1.58;color:var(--text-body);margin-top:9px;max-width:470px}
+
+/* ============================================================
+   S3 · benefícios (lista com ícone)
+   ============================================================ */
+.benefits{position:absolute;left:var(--pad);right:var(--pad);top:262px;bottom:90px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px 24px}
+.benefit{background:#fff;border:1px solid var(--line-light);border-radius:16px;padding:26px 30px;display:flex;gap:20px;align-items:flex-start}
+.benefit .bi{width:52px;height:52px;border-radius:13px;background:var(--olive);color:#fff;display:grid;place-items:center;flex:none}
+.benefit .bi svg{width:26px;height:26px;stroke:#fff;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.benefit .bt{font-family:var(--font-display);font-size:23px;color:var(--charcoal);line-height:1.15}
+.benefit .bp{font-size:14.5px;line-height:1.58;color:var(--text-body);margin-top:9px;max-width:440px}
+
+/* ============================================================
+   S4 · cartões de produto F/E/C
+   ============================================================ */
+.prods{position:absolute;left:var(--pad);right:var(--pad);top:248px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prod{background:#fff;border:1px solid var(--line-light);border-radius:14px;padding:24px 24px;display:flex;flex-direction:column;height:300px}
+.prod .ph{display:flex;align-items:center;gap:14px}
+.prod .pname{font-family:var(--font-display);font-size:21px;color:var(--charcoal)}
+.prod .ptag{font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.prod .plead{font-family:var(--font-display);font-style:italic;font-size:20px;line-height:1.25;margin:20px 0 10px}
+.prod.f .plead{color:var(--terracotta-ink)}.prod.e .plead{color:var(--olive)}.prod.c .plead{color:var(--slate)}
+.prod .pdesc{font-size:13.5px;line-height:1.55;color:var(--text-body)}
+.prod .pfoot{margin-top:auto;border-top:1px solid var(--line-light);padding-top:13px;font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.prod.f .pfoot{color:var(--terracotta-ink)}.prod.e .pfoot{color:var(--olive)}.prod.c .pfoot{color:var(--slate)}
+
+/* ============================================================
+   S8 · o acordo (duas colunas)
+   ============================================================ */
+.deal{position:absolute;left:var(--pad);right:var(--pad);top:214px;bottom:152px;display:grid;grid-template-columns:1fr 1fr;gap:0 50px}
+.dealcol{display:flex;flex-direction:column}
+.dealcol .dh{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.dealcol.you .dh{color:var(--terracotta-ink)}.dealcol.us .dh{color:var(--olive)}
+.dealcol .dsub{font-size:12px;color:var(--muted);margin-bottom:18px;font-weight:500;letter-spacing:.02em}
+.ditem{display:flex;gap:14px;align-items:flex-start;flex:1;padding-top:18px;border-top:1px solid var(--line-light)}
+.ditem .dd{font-family:var(--font-display);font-size:21px;line-height:1;flex:none}
+.dealcol.you .ditem .dd{color:var(--terracotta)}.dealcol.us .ditem .dd{color:var(--olive)}
+.ditem .dt{font-family:var(--font-display);font-size:18.5px;color:var(--charcoal);line-height:1.2}
+.ditem .dp{font-size:13.5px;line-height:1.55;color:var(--text-body);margin-top:6px}
+.dealband{position:absolute;left:var(--pad);right:var(--pad);bottom:84px;background:var(--olive-soft);border-radius:12px;padding:16px 22px;
+  display:flex;align-items:center;gap:13px}
+.dealband .bdot{font-size:20px}
+.dealband p{font-size:14px;color:var(--charcoal)}
+.dealband em{color:var(--olive)}
+
+/* ============================================================
+   S10 · timeline fechamento
+   ============================================================ */
+.timeline{position:absolute;left:var(--pad);right:var(--pad);bottom:150px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.tstep{padding-right:34px}
+.tstep .tk{font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-light)}
+.tstep .tx{font-size:14.5px;line-height:1.5;color:var(--on-dark);margin-top:9px;max-width:300px}
+.tstep + .tstep{border-left:1px solid var(--line-dark);padding-left:34px}
+.closecontact{position:absolute;left:var(--pad);right:var(--pad);bottom:84px;display:flex;justify-content:space-between;align-items:baseline;
+  border-top:1px solid var(--line-dark);padding-top:18px}
+.closecontact .nm{font-family:var(--font-display);font-size:19px;color:var(--off-white)}
+.closecontact .ct{font-size:13.5px;color:var(--on-dark);margin-top:3px;white-space:nowrap}
+.closecontact .ct a{color:var(--terracotta-light);text-decoration:none}
+.closecontact .invite{font-family:var(--font-display);font-style:italic;font-size:18px;color:var(--olive-light);text-align:right}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0E0E0F;overflow:hidden;font-family:system-ui,sans-serif}
+.stage{position:fixed;left:0;right:0;top:0;bottom:62px;display:grid;place-items:center;overflow:hidden}
+.deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+.deck .slide{display:none}
+.deck .slide.active{display:block}
+.controls{position:fixed;left:0;right:0;bottom:0;height:62px;display:flex;justify-content:center;align-items:center;gap:16px;background:#0E0E0F;border-top:1px solid #2F2F32;z-index:10}
+.controls button{appearance:none;border:1px solid #2F2F32;background:#1C1C1E;color:#F9F6F1;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;letter-spacing:.02em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
+.controls button:hover:not(:disabled){background:#2C2C2E;border-color:#4A6741}
+.controls button:disabled{opacity:.32;cursor:default}
+.controls .counter{color:#9A958C;font-size:12px;font-weight:600;letter-spacing:.18em;min-width:80px;text-align:center;font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="16 8 14 14 8 16 10 10"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15.5H5.5A1.5 1.5 0 0 0 4 20z"/><path d="M4 18.5A1.5 1.5 0 0 1 5.5 17H20"/></symbol>
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M4 3v5a4 4 0 0 0 8 0V3"/><path d="M8 16v1a5 5 0 0 0 10 0v-2"/><circle cx="18" cy="11" r="2.5"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v4.5h-4.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></symbol>
+  <symbol id="i-incl" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M19.5 6.5 21 8l2.2-2.4"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></symbol>
+</svg>
+<div class="stage"><div class="deck" id="deck">
+
+
+  <!-- ============================ S1 · CAPA ============================ -->
+  
+    <div class="slide dark" data-screen-label="01 Capa">
+      <div style="position:absolute;inset:0;background:radial-gradient(120% 95% at 88% -5%,rgba(196,114,74,.14),transparent 58%)"></div>
+      <div style="position:absolute;left:var(--pad);top:56px;display:flex;align-items:center;gap:18px" data-rise>
+        <span class="wm" style="font-size:24px"><span class="dot">·</span>Prumo</span>
+      </div>
+      <div style="position:absolute;left:var(--pad);right:var(--pad);top:208px">
+        <div class="eb" style="margin-bottom:26px" data-rise>Prumo Escolas · Para gestores e mantenedores</div>
+        <hr class="rule" style="margin:0 0 32px" data-rise="2" />
+        <h1 style="font-size:74px;line-height:1.07;color:var(--off-white);max-width:1010px;letter-spacing:-.018em" data-rise="2">
+          A infraestrutura de dados que vai definir o <em class="t-olive">padrão</em> da escola.
+        </h1>
+        <p style="font-family:var(--font-display);font-style:italic;font-size:26px;color:var(--terracotta-light);margin-top:26px" data-rise="3">
+          Um convite para conhecer — e conversar.
+        </p>
+      </div>
+      <div class="foot"><span>·Prumo Escolas · RAVS</span><span>prumo.group</span></div>
+    </div>
+  
+
+  <!-- ===================== S2 · A TERÇA-FEIRA DA COORDENAÇÃO ===================== -->
+  
+    <div class="slide" data-screen-label="02 A manha da escola">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Escolas</span></div>
+      <div class="head">
+        <div class="eb" data-rise>Uma terça-feira qualquer</div>
+        <h2 data-rise>A coordenação não está sem dados.<br />Está <em class="t-terra">apagando incêndios</em>.</h2>
+      </div>
+
+      <div class="s2wrap">
+        <div class="s2-left">
+          <p class="big" data-rise="2">Inclusão, conflitos, casos de bullying, famílias aflitas, laudos perdidos.</p>
+          <p class="sub" data-rise="2">Tudo chega ao mesmo tempo e a escola gasta o dia reagindo, em vez de enxergar a criança. O contexto existe espalhado por sistemas, e-mails e cabeças.</p>
+          <div class="s2-theo" data-rise="3">
+            <span class="ph">T</span>
+            <p class="tx">E no meio de tudo isso, o Theo, aluno lido aos pedaços, nunca por inteiro. Famílias e escolas em conflito.</p>
+          </div>
+        </div>
+
+        <div class="thread">
+          <div class="tnode crit" data-rise="3">
+            <div class="tmeta"><span class="ttime">07h42</span><span class="tchan wpp">WhatsApp</span></div>
+            <p class="ttext">A mãe da Helena cobra a coordenação: <b>"por que ninguém me avisou?"</b></p>
+          </div>
+          <div class="tnode crit" data-rise="4">
+            <div class="tmeta"><span class="ttime">08h10</span><span class="tchan">Sala</span></div>
+            <p class="ttext">Terceiro atrito do Theo com um colega em oito dias. 
+A professora media e segue a aula.</p>
+          </div>
+          <div class="tnode" data-rise="4">
+            <div class="tmeta"><span class="ttime">09h05</span><span class="tchan">E-mail</span></div>
+            <p class="ttext">O laudo do Theo está numa thread de fevereiro. Ninguém acha na hora da reunião.</p>
+          </div>
+          <div class="tnode" data-rise="5">
+            <div class="tmeta"><span class="ttime">11h20</span><span class="tchan">Reunião</span></div>
+            <p class="ttext">O PEI é discutido sem o contexto de casa: pais separados, ele alterna de lar toda semana.</p>
+          </div>
+          <div class="tnode" data-rise="5">
+            <div class="tmeta"><span class="ttime">17h00</span><span class="tchan">Caderno</span></div>
+            <p class="ttext">A professora anotou tudo no caderno dela. 
+Amanhã, quem assumir a turma não vai ver.</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>A manhã da escola</span><span>02 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S3 · A VIRADA ===================== -->
+  
+    <div class="slide dark" data-screen-label="03 A virada">
+      <div style="position:absolute;inset:0;background:radial-gradient(110% 90% at 50% -10%,rgba(196,114,74,.16),transparent 60%)"></div>
+      <div style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
+      <div class="turn">
+        <div class="eb" data-rise>A virada</div>
+        <h2 data-rise>E se a escola tivesse <em>uma só memória</em>?</h2>
+        <p class="tlead" data-rise="2">O Prumo é a camada de coordenação que faltava. Transforma o que está espalhado em contexto vivo — <em>uma memória que cuida e alinha equipe e famílias</em>.</p>
+        <div class="verbsrow" data-rise="3">
+          <div class="vb"><div class="vn">Integra</div><div class="vd">Reúne os dados dispersos em emails e sistemas</div></div>
+          <div class="vb"><div class="vn">Prediz</div><div class="vd">Antecipa riscos e oportunidades</div></div>
+          <div class="vb"><div class="vn">Orquestra</div><div class="vd">Coordena equipe e famílias em torno da criança</div></div>
+        </div>
+      </div>
+      <div class="foot"><span>A virada</span><span>03 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S4 · A PLATAFORMA ===================== -->
+  
+    <div class="slide" data-screen-label="04 A plataforma">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Escolas</span></div>
+      <div class="head">
+        <div class="eb" data-rise>O QUE DESENVOLVEMOS</div>
+        <h2 data-rise>Dois produtos. <em class="t-terra">Uma só memória.</em></h2>
+        <p class="lead" data-rise>Nosso sistema aproveita os dados existentes para gerar mais inteligência.</p>
+      </div>
+
+      <div class="platrow">
+        <div class="platcard e" data-rise="2">
+          <div class="pch"><span class="pav">E</span><div><div class="pname">Prumo Escolas</div><div class="ptag">Para quem coordena</div></div></div>
+          <p class="plead">Dado disperso vira decisão.</p>
+          <p class="pdesc">Antecipa risco de evasão, apoia a inclusão e preserva a memória do aluno entre turnos, professores e anos.
+
+</p>
+          <div class="pfeat">
+            <div class="pf"><svg viewBox="0 0 24 24"><use href="#i-grid"/></svg>Visão de toda a escola numa tela</div>
+            <div class="pf"><svg viewBox="0 0 24 24"><use href="#i-incl"/></svg>Inclusão e NEE sem sobrecarregar o professor</div>
+          </div>
+        </div>
+
+        <div class="platlink">
+          <div class="knot"><span class="dot">·</span>Prumo</div>
+          <div class="klabel">a camada</div>
+        </div>
+
+        <div class="platcard f" data-rise="3">
+          <div class="pch"><span class="pav">F</span><div><div class="pname">Prumo Famílias</div><div class="ptag">Para quem cuida em casa</div></div></div>
+          <p class="plead">O contexto de casa entra na escola.</p>
+          <p class="pdesc">A família registra rotina e observações com consentimento. A escola passa a ver a metade da história que não enxergava.</p>
+          <div class="pfeat">
+            <div class="pf"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg>Comunicação calma, sem ruído de WhatsApp</div>
+            <div class="pf"><svg viewBox="0 0 24 24"><use href="#i-lock"/></svg>A família decide o que compartilha</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="adopt" data-rise="4">
+        <span class="bdot">·</span>
+        <p>Escolas de referência em <em>São Paulo</em> já estão construindo o Prumo conosco — moldando o produto antes de ele virar mercado.</p>
+      </div>
+      <div class="foot"><span>A plataforma</span><span>04 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S5 · TELA 1 · MESA ===================== -->
+  
+    <div class="slide" data-screen-label="05 Tela mesa">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Escolas · produto</span></div>
+      <div class="screen-head">
+        <div class="eb" data-rise>A tela · 1 de 3</div>
+        <h2 data-rise>O dia da coordenação <em class="t-terra">começa aqui</em>.</h2>
+        <p class="lead" data-rise>Toda criança acompanhada, num só lugar. Nada chega tarde demais, nada se perde na troca de professor.</p>
+      </div>
+
+      <div class="screenslot" data-rise="2">
+        <div class="browser screenframe" style="width:1006px">
+          <div class="bbar">
+            <div class="tl"><i></i><i></i><i></i></div>
+            <div class="url"><svg class="sys-icon" style="width:13px;height:13px;margin-right:7px;color:var(--olive)"><use href="#i-lock"/></svg><b>app.prumo.group</b>&nbsp;/escolas/visao-geral</div>
+          </div>
+          <div class="sysapp">
+            <aside class="sys-side">
+              <div class="sys-brand"><span class="wm2"><span class="dot">·</span>Prumo</span><span class="ebadge">E</span></div>
+              <div class="sys-seclabel">Escolas</div>
+              <nav class="sys-nav">
+                <span class="item active"><svg class="sys-icon"><use href="#i-grid"/></svg>Visão geral</span>
+                <span class="item"><svg class="sys-icon"><use href="#i-users"/></svg>Turmas</span>
+                <span class="item"><svg class="sys-icon"><use href="#i-compass"/></svg>Acompanhamento</span>
+                <span class="item"><svg class="sys-icon"><use href="#i-heart"/></svg>Famílias</span>
+                <span class="item"><svg class="sys-icon"><use href="#i-lock"/></svg>Consentimentos</span>
+              </nav>
+              <div class="sys-user"><span class="ua">R</span><div><div class="un">Renata Lopes</div><div class="ur">Coordenação</div></div></div>
+            </aside>
+            <div class="sys-main">
+              <div class="sys-top">
+                <div><div class="ebt">Terça · 21 de maio</div><div class="tt">Bom dia, Renata.</div></div>
+                <div class="sys-search"><svg class="sys-icon"><use href="#i-search"/></svg>Buscar criança ou turma</div>
+              </div>
+              <div class="sys-bodyscroll">
+                <div class="sys-stats">
+                  <div class="sys-stat"><svg class="sys-icon"><use href="#i-users"/></svg><div><div class="n">6</div><div class="l">Turmas</div></div></div>
+                  <div class="sys-stat"><svg class="sys-icon"><use href="#i-heart"/></svg><div><div class="n">142</div><div class="l">Crianças acompanhadas</div></div></div>
+                  <div class="sys-stat"><svg class="sys-icon"><use href="#i-lock"/></svg><div><div class="n">98</div><div class="l">Consentimentos ativos</div></div></div>
+                </div>
+                <div class="sys-sechead"><span class="h">Acompanhamentos em aberto</span><span class="s">Coordenação, professores e famílias — juntos</span></div>
+                <div class="sys-list">
+                  <div class="sys-row"><div class="sys-av">H</div><div class="meta"><div class="nm">Helena Martins<span class="tg">Pré II · Manhã</span></div><div class="nt">Família registrou resistência à despedida. Vale uma conversa calma.</div></div><span class="pchip observar"><svg class="sys-icon"><use href="#i-eye"/></svg>Vale observar</span><span class="when">há 2 dias</span></div>
+                  <div class="sys-row"><div class="sys-av" style="background:var(--terracotta-soft);color:var(--terracotta-ink)">T</div><div class="meta"><div class="nm">Theo Mendes<span class="tg">4º Ano A · Integral</span></div><div class="nt">Três atritos em oito dias. Família sinaliza fim de semana mais retraído.</div></div><span class="pchip acompanhar" style="background:var(--terracotta-soft);color:var(--terracotta-ink)"><svg class="sys-icon"><use href="#i-compass"/></svg>Pede ação</span><span class="when">hoje</span></div>
+                  <div class="sys-row"><div class="sys-av">L</div><div class="meta"><div class="nm">Lia Fernandes<span class="tg">Pré I · Manhã</span></div><div class="nt">Acionada a Dra. Ana, com consentimento da família.</div></div><span class="pchip acompanhar"><svg class="sys-icon"><use href="#i-compass"/></svg>Em acompanhamento</span><span class="when">há 1 semana</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>O produto · a mesa da coordenação</span><span>05 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S6 · TELA 2 · CASO DO THEO ===================== -->
+  
+    <div class="slide" data-screen-label="06 Tela caso">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Escolas · produto</span></div>
+      <div class="screen-head">
+        <div class="eb" data-rise>A tela · 2 de 3</div>
+        <h2 data-rise>Uma criança, <em class="t-terra">por inteiro</em>. <span style="color:var(--olive)">Menos conflito, mais aliança.</span></h2>
+        <p class="lead" data-rise>Escola e família enxergam o mesmo Theo — e agem sobre <strong style="color:var(--charcoal);font-weight:600">prioridades acordadas</strong>, com o progresso à vista.</p>
+      </div>
+
+      <div class="screenslot" data-rise="2">
+        <div class="browser screenframe" style="width:1006px">
+          <div class="bbar">
+            <div class="tl"><i></i><i></i><i></i></div>
+            <div class="url"><svg class="sys-icon" style="width:13px;height:13px;margin-right:7px;color:var(--olive)"><use href="#i-lock"/></svg><b>app.prumo.group</b>&nbsp;/escolas/caso/theo-mendes</div>
+          </div>
+          <div class="caso">
+            <div class="caso-top">
+              <span class="ph">T</span>
+              <div>
+                <div class="nm">Theo Mendes</div>
+                <div class="mt">9 anos · 4º Ano A · Turno integral</div>
+              </div>
+              <span class="fam"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>12 dias no Famílias</span>
+              <span class="nee">TDAH · CID F90.0</span>
+            </div>
+
+            <div class="caso-sech"><span class="h">Theo por inteiro</span><span class="s">Seis dimensões — escola e família, a mesma leitura</span></div>
+            <div class="dimstrip">
+              <div class="dimtile slate"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-book"/></svg></span><span class="dn">Aprendizado</span><span class="dchip"><span class="dd"></span>Acompanhar</span></div>
+              <div class="dimtile terra"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-users"/></svg></span><span class="dn">Socialização</span><span class="dchip"><span class="dd"></span>Pede ação</span></div>
+              <div class="dimtile olive"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-steth"/></svg></span><span class="dn">Saúde</span><span class="dchip"><span class="dd"></span>Estável</span></div>
+              <div class="dimtile slate"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></span><span class="dn">Emocional</span><span class="dchip"><span class="dd"></span>Acompanhar</span></div>
+              <div class="dimtile olive"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></span><span class="dn">Comportamento</span><span class="dchip"><span class="dd"></span>Estável</span></div>
+              <div class="dimtile olive"><span class="di"><svg viewBox="0 0 24 24"><use href="#i-bolt"/></svg></span><span class="dn">Engajamento</span><span class="dchip"><span class="dd"></span>Estável</span></div>
+            </div>
+
+            <div class="caso-sech"><span class="h">Combinados</span><span class="s">Prioridades acordadas, progresso à vista</span><span class="tag">Menos conflito, mais aliança</span></div>
+            <div class="comborow">
+              <div class="combo">
+                <div class="ctag"><span class="cdim">Socialização</span></div>
+                <div class="ctitle">Alinhar com Fernanda o que ocorre em casa.</div>
+                <div class="cfoot"><span class="who"><span class="av esc">E</span><span class="av fam">F</span></span><span class="cstat go"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Em andamento</span></div>
+              </div>
+              <div class="combo">
+                <div class="ctag"><span class="cdim">Socialização</span></div>
+                <div class="ctitle">Mediar a dupla Theo + Gabriel na Ed. Física.</div>
+                <div class="cfoot"><span class="who"><span class="av prof">P</span><span class="av esc">E</span></span><span class="cstat ok"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg>Concluído</span></div>
+              </div>
+              <div class="combo">
+                <div class="ctag"><span class="cdim">Emocional</span></div>
+                <div class="ctitle">Acolhimento individual com a orientadora.</div>
+                <div class="cfoot"><span class="who"><span class="av esc">O</span><span class="av fam">F</span></span><span class="cstat due"><svg viewBox="0 0 24 24"><use href="#i-clock" /></svg>Agendado</span></div>
+              </div>
+            </div>
+
+            <div class="casoband">
+              <svg viewBox="0 0 24 24"><use href="#i-lock"/></svg>
+              <p>Laudo e observações de casa compartilhados pela família com consentimento. Cada um vê o que precisa.</p>
+              <span class="sig">LGPD + ECA Digital nativos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>O produto · o caso do aluno</span><span>06 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S7 · TELA 3 · FAMÍLIA + ESCOLA ===================== -->
+  
+    <div class="slide" data-screen-label="07 Tela familia">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Famílias · produto</span></div>
+      <div class="screen-head">
+        <div class="eb" data-rise>A tela · 3 de 3</div>
+        <h2 data-rise>A metade da história que a escola <em class="t-terra">não vê sozinha</em>.</h2>
+      </div>
+
+      <div class="fam3">
+        <div class="phone" data-rise="2">
+          <div class="phone-scr">
+            <div class="fam-top">
+              <span class="wm"><span class="dot">·</span>Prumo</span>
+              <div class="eb">Boa noite</div>
+              <div class="hi">Oi, Fernanda.</div>
+            </div>
+            <div class="fam-body">
+              <div class="fam-prompt">
+                <div class="q">Como foi a tarde do Theo hoje?</div>
+                <div class="a"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><use href="#i-pencil"/></svg>Registrar em 30s</div>
+              </div>
+              <div class="fam-lbl">Você registrou</div>
+              <div class="fam-entry">
+                <div class="ew">Domingo · 19h</div>
+                <div class="et">"No fim de semana ele preferiu ficar <b>sozinho</b>, o que não é comum."</div>
+              </div>
+              <div class="fam-consent">
+                <svg viewBox="0 0 24 24"><use href="#i-lock"/></svg>
+                <span>Você escolhe o que a escola vê. Revogável quando quiser.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fam-exp">
+          <div class="eb" data-rise="2">Família + escola, juntas</div>
+          <h3 data-rise="2">O que a mãe registra em casa <em>chega ao caso do Theo</em> — com consentimento.</h3>
+          <div class="fam-flow">
+            <div class="fam-step" data-rise="3"><span class="sd">·</span><div><div class="stt">A família observa</div><p class="stp">Rotina, humor, o fim de semana. Em segundos, sem formulário cansativo.</p></div></div>
+            <div class="fam-step" data-rise="4"><span class="sd">·</span><div><div class="stt">A escola entende</div><p class="stp">O sinal vira contexto na dimensão Emocional do Theo — antes de virar problema.</p></div></div>
+            <div class="fam-step" data-rise="5"><span class="sd">·</span><div><div class="stt">A conversa muda</div><p class="stp">Coordenação e família falam a partir da mesma memória, não de versões soltas.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>O produto · família e escola</span><span>07 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S8 · O QUE MUDA ===================== -->
+  
+    <div class="slide" data-screen-label="08 O que muda">
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org">Prumo Escolas</span></div>
+      <div class="head">
+        <div class="eb" data-rise>O que muda na escola</div>
+        <h2 data-rise>Menos incêndio. <em class="t-terra">Mais cuidado.</em></h2>
+      </div>
+
+      <div class="outcomes">
+        <div class="ocard" data-rise="2">
+          <div class="oi"><svg viewBox="0 0 24 24"><use href="#i-compass"/></svg></div>
+          <div class="ot">O risco aparece <em>cedo</em></div>
+          <p class="op">Sinais de evasão e de clima são lidos enquanto ainda dá para agir.</p>
+          <div class="contrast">
+            <div class="cr ca"><span class="cl">Antes</span>o sinal chegava na rematrícula</div>
+            <div class="cr cb"><span class="cl">Agora</span>a tempo de uma conversa</div>
+          </div>
+        </div>
+        <div class="ocard" data-rise="3">
+          <div class="oi"><svg viewBox="0 0 24 24"><use href="#i-incl"/></svg></div>
+          <div class="ot">A inclusão deixa de pesar</div>
+          <p class="op">Laudo, adaptações e o que funciona em campo ficam à mão de quem precisa.</p>
+          <div class="contrast">
+            <div class="cr ca"><span class="cl">Antes</span>cada ano recomeçava do zero</div>
+            <div class="cr cb"><span class="cl">Agora</span>o contexto acompanha a criança</div>
+          </div>
+        </div>
+        <div class="ocard" data-rise="4">
+          <div class="oi"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></div>
+          <div class="ot">A memória <em>não vaza</em></div>
+          <p class="op">Anos de contexto sobrevivem às trocas de professor e de turno.</p>
+          <div class="contrast">
+            <div class="cr ca"><span class="cl">Antes</span>tudo morava nas pessoas</div>
+            <div class="cr cb"><span class="cl">Agora</span>mora na escola, com segurança</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>O que muda</span><span>08 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S9 · BENEFÍCIOS FINANCEIROS ===================== -->
+  
+    <div class="slide dark" data-screen-label="09 Beneficios financeiros">
+      <div style="position:absolute;inset:0;background:radial-gradient(115% 90% at 85% -10%,rgba(74,103,65,.20),transparent 58%)"></div>
+      <div class="chrome"><span class="wm"><span class="dot">·</span>Prumo</span><span class="org" style="color:var(--muted-on-dark)">Prumo Escolas</span></div>
+      <div class="head">
+        <div class="eb" data-rise>O retorno do cuidado</div>
+        <h2 data-rise style="color:var(--off-white)">Cuidar bem também <em class="t-olive">fecha a conta</em>.</h2>
+      </div>
+
+      <div class="fingrid">
+        <div class="fincard" data-rise="2">
+          <div class="ftop"><span class="farrow"><svg viewBox="0 0 24 24"><use href="#i-arrow-up"/></svg></span><span class="flabel">Retenção</span></div>
+          <div class="ft">Menos conflito, <em>mais retenção</em></div>
+          <p class="fp">Famílias em aliança com a escola brigam menos e saem menos. A base de alunos se preserva de um ano para o outro.</p>
+          <div class="fmetric"><span class="dir">↑</span><span class="kpi">Mais retenção<b>Base de alunos preservada</b></span></div>
+        </div>
+
+        <div class="fincard" data-rise="3">
+          <div class="ftop"><span class="farrow"><svg viewBox="0 0 24 24"><use href="#i-arrow-down"/></svg></span><span class="flabel">Captação</span></div>
+          <div class="ft">Cada família vira <em>indicação</em></div>
+          <p class="fp">Famílias satisfeitas trazem outras famílias. A escola capta novos alunos com menos custo e menos esforço de marketing.</p>
+          <div class="fmetric"><span class="dir">↓</span><span class="kpi">Menor custo<b>Captação de novos alunos</b></span></div>
+        </div>
+
+        <div class="fincard" data-rise="4">
+          <div class="ftop"><span class="farrow"><svg viewBox="0 0 24 24"><use href="#i-arrow-down"/></svg></span><span class="flabel">Eficiência</span></div>
+          <div class="ft">A equipe gera <em>mais valor com menos esforço</em></div>
+          <p class="fp">Integração de dados e automações eliminam o retrabalho. A coordenação gasta menos horas apagando incêndios.</p>
+          <div class="fmetric"><span class="dir">↓</span><span class="kpi">Menos horas<b>Tempo da equipe liberado</b></span></div>
+        </div>
+      </div>
+      <div class="foot"><span>O retorno do cuidado</span><span>09 / 10</span></div>
+    </div>
+  
+
+  <!-- ===================== S10 · O CONVITE ===================== -->
+  
+    <div class="slide dark" data-screen-label="10 O convite">
+      <div style="position:absolute;inset:0;background:radial-gradient(110% 90% at 12% 110%,rgba(74,103,65,.16),transparent 60%)"></div>
+      <div style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
+
+      <div class="close-head">
+        <div class="eb" data-rise>O convite</div>
+        <h2 data-rise>O próximo passo é uma conversa de <em>30 min</em>.</h2>
+        <p class="clead" data-rise="2">Estamos reunindo agora um grupo seleto de escolas para implementar Prumo — por convite.</p>
+      </div>
+
+      <div class="close-expect" data-rise="3">
+        <div class="ce"><div class="cet"><span class="cd">·</span>Um diagnóstico ao vivo</div><p class="cep">Olhamos a sua operação real e mostramos onde o contexto da criança hoje se perde.</p></div>
+        <div class="ce"><div class="cet"><span class="cd">·</span>A plataforma na sua escola</div><p class="cep">O produto rodando com o contexto que importa para você.</p></div>
+        <div class="ce"><div class="cet"><span class="cd">·</span>A proposta do piloto</div><p class="cep">Como entramos juntos, no seu tempo e sem virar a operação.</p></div>
+      </div>
+
+      <div class="close-contacts" data-rise="4">
+        <div class="contacts">
+          <div class="contact">
+            <div class="cn">Jefferson Santos</div>
+            <div class="crole">CEO · Prumo / RAVS</div>
+            <div class="cc"><a href="/cdn-cgi/l/email-protection#274d4241414255544849674055525748554651540944484a094555"><span class="__cf_email__" data-cfemail="2a404f4c4c4f585945446a4d585f5a45584b5c5904494547044858">[email&#160;protected]</span></a> · +55 11 94492-2727</div>
+          </div>
+          <div class="contact">
+            <div class="cn">Gabrielle Incerpi</div>
+            <div class="crole">CFO · Prumo / RAVS</div>
+            <div class="cc"><a href="/cdn-cgi/l/email-protection#791e181b0b101c15151c391e0b0c09160b180f0a571a1614571b0b"><span class="__cf_email__" data-cfemail="e6818784948f838a8a83a6819493968994879095c885898bc88494">[email&#160;protected]</span></a> · +55 13 99720-6447</div>
+          </div>
+        </div>
+        <div class="invite">Grupo reduzido. Por convite.</div>
+      </div>
+      <div class="foot"><span>·Prumo Escolas · RAVS</span><span>prumo.group</span></div>
+    </div>
+  
+
+
+</div></div>
+<nav class="controls">
+  <button id="prev" type="button">‹ Anterior</button>
+  <span class="counter" id="counter">01 / 10</span>
+  <button id="next" type="button">Próximo ›</button>
+</nav>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('.slide'));
+  var n=slides.length, i=0;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), counter=document.getElementById('counter');
+  try{var st=parseInt(localStorage.getItem('prumo-teaser-slide'),10); if(!isNaN(st)&&st>=0&&st<n) i=st;}catch(e){}
+  function pad(x){return (x<10?'0':'')+x;}
+  function fitStage(){var sw=window.innerWidth, sh=window.innerHeight-62; var sc=Math.min(sw/1280, sh/720)*0.98; deck.style.transform='scale('+sc+')';}
+  function fitScreens(){var a=slides[i]; var fr=a.querySelectorAll('.screenframe'); for(var k=0;k<fr.length;k++){var f=fr[k]; f.style.transform='none'; var avail=f.parentElement.clientHeight, natural=f.offsetHeight; var s=Math.min(1, avail/natural); f.style.transform='scale('+s+')';}}
+  function show(idx){ i=Math.max(0,Math.min(n-1,idx)); for(var k=0;k<n;k++){slides[k].classList.toggle('active',k===i);} counter.textContent=pad(i+1)+' / '+pad(n); prev.disabled=(i===0); next.disabled=(i===n-1); try{localStorage.setItem('prumo-teaser-slide',i);}catch(e){} fitScreens(); }
+  prev.addEventListener('click',function(){show(i-1);});
+  next.addEventListener('click',function(){show(i+1);});
+  document.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1);} else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);} else if(e.key==='Home'){e.preventDefault();show(0);} else if(e.key==='End'){e.preventDefault();show(n-1);} });
+  window.addEventListener('resize',function(){fitStage();fitScreens();});
+  fitStage(); show(i);
+})();
+</script>
+</body>
+</html>
