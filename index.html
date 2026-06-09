@@ -634,6 +634,133 @@ html,body{margin:0;height:100%;background:#0E0E0F;overflow:hidden;font-family:sy
 .controls button:disabled{opacity:.32;cursor:default}
 .controls .counter{color:#9A958C;font-size:12px;font-weight:600;letter-spacing:.18em;min-width:80px;text-align:center;font-variant-numeric:tabular-nums}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ============================================================
+   BARRA DE PROGRESSO (ambos os modos)
+   ============================================================ */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;background:transparent;z-index:30;pointer-events:none}
+.progress .fill{height:100%;width:0;background:var(--terracotta);transition:width .12s linear}
+
+/* ============================================================
+   MODO RESPONSIVO (reflow) — telas estreitas / celular
+   Ativado por JS (classe .flow em <html> e <body>) via matchMedia.
+   Cada slide vira uma seção fluida, de largura total e altura automática.
+   ============================================================ */
+html.flow{height:auto;overflow-x:hidden;overflow-y:auto;background:var(--off-white)}
+body.flow{height:auto;min-height:100%;overflow:visible;background:var(--off-white);position:static}
+.flow .stage{position:static;display:block;inset:auto;overflow:visible;height:auto;place-items:initial}
+.flow .deck{width:100%;height:auto;transform:none!important;transform-origin:top left}
+.flow .controls{display:none}
+
+.flow .deck .slide{
+  display:block!important;width:100%!important;height:auto!important;min-height:auto!important;
+  overflow:visible;position:relative;--pad:22px;padding:56px 22px 38px;
+}
+.flow .deck .slide + .slide{border-top:1px solid var(--line-light)}
+
+/* neutraliza o posicionamento absoluto de todos os blocos */
+.flow .chrome,.flow .head,.flow .screen-head,.flow .close-head,.flow .turn,
+.flow .s2wrap,.flow .thread,.flow .platrow,.flow .adopt,.flow .screenslot,.flow .outcomes,
+.flow .fingrid,.flow .fam3,.flow .close-expect,.flow .close-contacts,.flow .foot,
+.flow .cap-wm,.flow .cap-body,.flow .s-wm,.flow .verbsrow{
+  position:static!important;inset:auto!important;left:auto!important;right:auto!important;
+  top:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;height:auto!important;
+}
+
+/* topo de marca + ritmo vertical */
+.flow .chrome{display:flex;margin-bottom:20px}
+.flow .cap-wm,.flow .s-wm{margin-bottom:20px}
+.flow .head,.flow .screen-head,.flow .close-head,.flow .turn{margin-bottom:18px}
+.flow .s2wrap,.flow .platrow,.flow .screenslot,.flow .outcomes,.flow .fingrid,
+.flow .fam3,.flow .close-expect,.flow .adopt,.flow .close-contacts{margin-top:22px}
+
+/* rodapé por seção */
+.flow .foot{display:flex;margin-top:26px;padding-top:13px;border-top:1px solid var(--line-light);opacity:.65;font-size:10px}
+.flow .slide.dark .foot{border-top-color:var(--line-dark)}
+
+/* escala tipográfica mobile */
+.flow .cap-body h1{font-size:clamp(30px,8.4vw,40px)!important;max-width:none!important}
+.flow .cap-body p{font-size:18px!important;max-width:none!important}
+.flow .head h2{font-size:clamp(23px,6.4vw,30px)}
+.flow .head .lead{font-size:15.5px}
+.flow .turn h2{font-size:clamp(25px,7vw,34px);max-width:none}
+.flow .turn .tlead{font-size:16px;max-width:none}
+.flow .screen-head h2{font-size:clamp(20px,5.6vw,26px)}
+.flow .screen-head .lead{font-size:14.5px}
+.flow .close-head h2{font-size:clamp(24px,6.6vw,32px);max-width:none}
+.flow .close-head .clead{font-size:15px;max-width:none}
+
+/* grids -> coluna única */
+.flow .s2wrap,.flow .platrow,.flow .outcomes,.flow .fam3,.flow .fingrid{
+  display:flex!important;flex-direction:column;gap:16px!important}
+
+/* S2 — manhã da escola */
+.flow .s2-left{padding-right:0}
+.flow .s2-left .big{font-size:22px}
+.flow .s2-left .sub,.flow .s2-theo .tx,.flow .tnode .ttext{max-width:none}
+
+/* S3 — verbos da virada */
+.flow .verbsrow{display:flex!important;flex-direction:column;margin-top:22px}
+.flow .verbsrow .vb{padding:16px 0;text-align:left}
+.flow .verbsrow .vb + .vb{border-left:0;border-top:1px solid var(--line-dark)}
+.flow .verbsrow .vd{white-space:normal}
+
+/* S4 — plataforma: conector vira divisor enxuto */
+.flow .platlink{padding:2px 0}
+.flow .platlink::before{display:none}
+.flow .platcard{padding:24px 22px}
+
+/* ---------- TELAS DE PRODUTO ---------- */
+.flow .screenslot{display:block;align-items:stretch}
+.flow .screenframe{width:100%!important;transform:none!important;box-shadow:0 18px 40px -28px rgba(28,28,30,.5)}
+.flow .browser .url{font-size:10.5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+
+/* tela 1 — esconde a barra lateral (cromo) e foca no conteúdo */
+.flow .sysapp{display:block;height:auto}
+.flow .sys-side{display:none}
+.flow .sys-main{min-width:0}
+.flow .sys-top{flex-wrap:wrap;gap:10px;padding:15px 16px}
+.flow .sys-top .tt{font-size:21px;white-space:normal}
+.flow .sys-search{margin-left:0;width:100%}
+.flow .sys-bodyscroll{overflow:visible;padding:16px}
+.flow .sys-stats{gap:8px}
+.flow .sys-stat{padding:12px;flex-direction:column;align-items:flex-start;gap:7px}
+.flow .sys-stat .l{white-space:normal}
+.flow .sys-sechead{flex-wrap:wrap}
+.flow .sys-sechead .s{white-space:normal}
+.flow .sys-row{flex-wrap:wrap;gap:9px 12px}
+.flow .sys-row .meta{flex:1 1 60%}
+.flow .sys-row .nm,.flow .sys-row .nt{white-space:normal}
+.flow .sys-row .when{width:auto;margin-left:auto}
+
+/* tela 2 — caso do Theo */
+.flow .caso{padding:18px 16px}
+.flow .caso-top{flex-wrap:wrap}
+.flow .caso-top .nee,.flow .caso-top .fam{margin-left:0}
+.flow .caso-sech{flex-wrap:wrap;row-gap:4px}
+.flow .caso-sech .tag{margin-left:0}
+.flow .dimstrip{grid-template-columns:1fr 1fr;gap:8px}
+.flow .comborow{grid-template-columns:1fr;gap:10px}
+.flow .casoband{flex-wrap:wrap;row-gap:8px}
+.flow .casoband .sig{margin-left:0;width:100%}
+
+/* tela 3 — app da família */
+.flow .fam3{align-items:stretch}
+.flow .phone{width:min(300px,84vw);justify-self:center;align-self:center}
+.flow .fam-exp h3{font-size:24px;max-width:none}
+.flow .fam-step .stp{max-width:none}
+
+/* S8 / S9 — cards */
+.flow .ocard,.flow .fincard{padding:24px 22px}
+.flow .fincard .ft{font-size:23px}
+
+/* S10 — o convite */
+.flow .close-expect{border:0!important}
+.flow .close-expect .ce{padding:16px 0!important;border:0!important}
+.flow .close-expect .ce + .ce{border-left:0!important;border-top:1px solid var(--line-dark)!important;padding-left:0!important}
+.flow .close-contacts{flex-direction:column;align-items:flex-start;gap:18px;border-top:1px solid var(--line-dark);padding-top:18px}
+.flow .contacts{flex-direction:column;gap:22px}
+.flow .close-contacts .invite{text-align:left;white-space:normal}
 </style>
 </head>
 <body>
@@ -660,6 +787,7 @@ html,body{margin:0;height:100%;background:#0E0E0F;overflow:hidden;font-family:sy
   <symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></symbol>
   <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></symbol>
 </svg>
+<div class="progress"><div class="fill"></div></div>
 <div class="stage"><div class="deck" id="deck">
 
 
@@ -667,10 +795,10 @@ html,body{margin:0;height:100%;background:#0E0E0F;overflow:hidden;font-family:sy
   
     <div class="slide dark" data-screen-label="01 Capa">
       <div style="position:absolute;inset:0;background:radial-gradient(120% 95% at 88% -5%,rgba(196,114,74,.14),transparent 58%)"></div>
-      <div style="position:absolute;left:var(--pad);top:56px;display:flex;align-items:center;gap:18px" data-rise>
+      <div class="cap-wm" style="position:absolute;left:var(--pad);top:56px;display:flex;align-items:center;gap:18px" data-rise>
         <span class="wm" style="font-size:24px"><span class="dot">·</span>Prumo</span>
       </div>
-      <div style="position:absolute;left:var(--pad);right:var(--pad);top:208px">
+      <div class="cap-body" style="position:absolute;left:var(--pad);right:var(--pad);top:208px">
         <div class="eb" style="margin-bottom:26px" data-rise>Prumo Escolas · Para gestores e mantenedores</div>
         <hr class="rule" style="margin:0 0 32px" data-rise="2" />
         <h1 style="font-size:74px;line-height:1.07;color:var(--off-white);max-width:1010px;letter-spacing:-.018em" data-rise="2">
@@ -736,7 +864,7 @@ Amanhã, quem assumir a turma não vai ver.</p>
   
     <div class="slide dark" data-screen-label="03 A virada">
       <div style="position:absolute;inset:0;background:radial-gradient(110% 90% at 50% -10%,rgba(196,114,74,.16),transparent 60%)"></div>
-      <div style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
+      <div class="s-wm" style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
       <div class="turn">
         <div class="eb" data-rise>A virada</div>
         <h2 data-rise>E se a escola tivesse <em>uma só memória</em>?</h2>
@@ -1052,7 +1180,7 @@ Amanhã, quem assumir a turma não vai ver.</p>
   
     <div class="slide dark" data-screen-label="10 O convite">
       <div style="position:absolute;inset:0;background:radial-gradient(110% 90% at 12% 110%,rgba(74,103,65,.16),transparent 60%)"></div>
-      <div style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
+      <div class="s-wm" style="position:absolute;left:var(--pad);top:56px"><span class="wm" style="font-size:22px"><span class="dot">·</span>Prumo</span></div>
 
       <div class="close-head">
         <div class="eb" data-rise>O convite</div>
@@ -1071,12 +1199,12 @@ Amanhã, quem assumir a turma não vai ver.</p>
           <div class="contact">
             <div class="cn">Jefferson Santos</div>
             <div class="crole">CEO · Prumo / RAVS</div>
-            <div class="cc"><a href="/cdn-cgi/l/email-protection#274d4241414255544849674055525748554651540944484a094555"><span class="__cf_email__" data-cfemail="2a404f4c4c4f585945446a4d585f5a45584b5c5904494547044858">[email&#160;protected]</span></a> · +55 11 94492-2727</div>
+            <div class="cc"><a href="/cdn-cgi/l/email-protection#cda7a8ababa8bfbea2a38daabfb8bda2bfacbbbee3aea2a0e3afbf"><span class="__cf_email__" data-cfemail="8de7e8ebebe8fffee2e3cdeafff8fde2ffecfbfea3eee2e0a3efff">[email&#160;protected]</span></a> · +55 11 94492-2727</div>
           </div>
           <div class="contact">
             <div class="cn">Gabrielle Incerpi</div>
             <div class="crole">CFO · Prumo / RAVS</div>
-            <div class="cc"><a href="/cdn-cgi/l/email-protection#791e181b0b101c15151c391e0b0c09160b180f0a571a1614571b0b"><span class="__cf_email__" data-cfemail="e6818784948f838a8a83a6819493968994879095c885898bc88494">[email&#160;protected]</span></a> · +55 13 99720-6447</div>
+            <div class="cc"><a href="/cdn-cgi/l/email-protection#ff989e9d8d969a93939abf988d8a8f908d9e898cd19c9092d19d8d"><span class="__cf_email__" data-cfemail="6f080e0d1d060a03030a2f081d1a1f001d0e191c410c0002410d1d">[email&#160;protected]</span></a> · +55 13 99720-6447</div>
           </div>
         </div>
         <div class="invite">Grupo reduzido. Por convite.</div>
@@ -1098,16 +1226,35 @@ Amanhã, quem assumir a turma não vai ver.</p>
   var slides=[].slice.call(deck.querySelectorAll('.slide'));
   var n=slides.length, i=0;
   var prev=document.getElementById('prev'), next=document.getElementById('next'), counter=document.getElementById('counter');
+  var fill=document.querySelector('.progress .fill');
+  var root=document.documentElement, body=document.body;
+  var mq=window.matchMedia('(max-width: 860px)');
   try{var st=parseInt(localStorage.getItem('prumo-teaser-slide'),10); if(!isNaN(st)&&st>=0&&st<n) i=st;}catch(e){}
   function pad(x){return (x<10?'0':'')+x;}
+  function mobile(){return mq.matches;}
   function fitStage(){var sw=window.innerWidth, sh=window.innerHeight-62; var sc=Math.min(sw/1280, sh/720)*0.98; deck.style.transform='scale('+sc+')';}
-  function fitScreens(){var a=slides[i]; var fr=a.querySelectorAll('.screenframe'); for(var k=0;k<fr.length;k++){var f=fr[k]; f.style.transform='none'; var avail=f.parentElement.clientHeight, natural=f.offsetHeight; var s=Math.min(1, avail/natural); f.style.transform='scale('+s+')';}}
-  function show(idx){ i=Math.max(0,Math.min(n-1,idx)); for(var k=0;k<n;k++){slides[k].classList.toggle('active',k===i);} counter.textContent=pad(i+1)+' / '+pad(n); prev.disabled=(i===0); next.disabled=(i===n-1); try{localStorage.setItem('prumo-teaser-slide',i);}catch(e){} fitScreens(); }
+  function fitScreens(){var a=slides[i]; if(!a) return; var fr=a.querySelectorAll('.screenframe'); for(var k=0;k<fr.length;k++){var f=fr[k]; f.style.transform='none'; var avail=f.parentElement.clientHeight, natural=f.offsetHeight; var s=Math.min(1, avail/natural); f.style.transform='scale('+s+')';}}
+  function updateProgress(){ if(!fill) return; if(mobile()){ var max=root.scrollHeight-root.clientHeight; var p=max>0 ? (window.pageYOffset||root.scrollTop||body.scrollTop)/max : 0; fill.style.width=(Math.min(1,Math.max(0,p))*100)+'%'; } else { fill.style.width=((i+1)/n*100)+'%'; } }
+  function show(idx){ i=Math.max(0,Math.min(n-1,idx)); for(var k=0;k<n;k++){slides[k].classList.toggle('active',k===i);} counter.textContent=pad(i+1)+' / '+pad(n); prev.disabled=(i===0); next.disabled=(i===n-1); try{localStorage.setItem('prumo-teaser-slide',i);}catch(e){} if(!mobile())fitScreens(); updateProgress(); }
+  function applyMode(){
+    if(mobile()){
+      root.classList.add('flow'); body.classList.add('flow');
+      deck.style.transform='none';
+      var fr=deck.querySelectorAll('.screenframe'); for(var k=0;k<fr.length;k++){fr[k].style.transform='none';}
+    } else {
+      root.classList.remove('flow'); body.classList.remove('flow');
+      fitStage(); show(i);
+    }
+    updateProgress();
+  }
   prev.addEventListener('click',function(){show(i-1);});
   next.addEventListener('click',function(){show(i+1);});
-  document.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1);} else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);} else if(e.key==='Home'){e.preventDefault();show(0);} else if(e.key==='End'){e.preventDefault();show(n-1);} });
-  window.addEventListener('resize',function(){fitStage();fitScreens();});
-  fitStage(); show(i);
+  document.addEventListener('keydown',function(e){ if(mobile())return; if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1);} else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);} else if(e.key==='Home'){e.preventDefault();show(0);} else if(e.key==='End'){e.preventDefault();show(n-1);} });
+  window.addEventListener('resize',function(){ if(!mobile()){fitStage();fitScreens();} updateProgress(); });
+  window.addEventListener('scroll',updateProgress,{passive:true});
+  if(mq.addEventListener)mq.addEventListener('change',applyMode); else mq.addListener(applyMode);
+  show(i);
+  applyMode();
 })();
 </script>
 </body>
